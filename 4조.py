@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+ ### 여기에 아이디 비밀번호 자기꺼 입력해야함
 # ID, PW 값
 id = '아이디'
 pw = '비번'
