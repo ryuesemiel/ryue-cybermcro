@@ -8,8 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 # ID, PW 값
-id = '2021071676'
-pw = 'gusals2949'
+id = '아이디'
+pw = '비번'
 
 # Site Open (Driver Load)
 target = 'https://selc.or.kr/lms/main/MainView.do'
