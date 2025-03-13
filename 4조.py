@@ -8,8 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 # ID, PW 값
-id = '자기학번'
-pw = '비번'
+id = '2021071676'
+pw = 'gusals2949'
 
 # Site Open (Driver Load)
 target = 'https://selc.or.kr/lms/main/MainView.do'
@@ -20,10 +20,33 @@ driver.get(url=target)
 # 요소 Timeout 설정 (암묵적 대기)
 driver.implicitly_wait(time_to_wait=3)
 
-# 팝업 닫기
-pop_up = driver.find_elements(By.XPATH, "//img[contains(@alt,'창닫기')]")
-for element in pop_up:
-    element.click()
+# ✅ 팝업 닫기 함수 (여러 개의 팝업을 감지하고 닫음)
+def handle_popups():
+    """현재 화면에 나타난 모든 팝업을 찾아 닫는 함수"""
+    try:
+        # 1️⃣ z-index가 높은 팝업 먼저 제거 (화면을 가리는 팝업 숨기기)
+        popups = driver.find_elements(By.XPATH, "//div[contains(@class,'popupLayout')]")
+        for popup in popups:
+            driver.execute_script("arguments[0].style.display='none';", popup)
+            print("📌 가려진 팝업을 숨겼습니다!")
+
+        # 2️⃣ 닫기 버튼 클릭 시도 (alt 속성에 '창닫기'가 포함된 모든 이미지 버튼 클릭)
+        close_buttons = driver.find_elements(By.XPATH, "//img[contains(@alt,'창닫기')]")
+        for close_button in close_buttons:
+            driver.execute_script("arguments[0].click();", close_button)
+            print("✅ 창닫기 버튼을 클릭했습니다!")
+
+        time.sleep(1)  # 안정성을 위해 약간의 대기 추가
+
+    except Exception as e:
+        print(f"🚨 팝업 닫기 중 오류 발생: {e}")
+
+# 🔄 로그인 전 팝업 닫기 실행
+handle_popups()
+
+print("✅ 모든 팝업이 닫혔습니다!")
+
+
 
 # 로그인 시작
 univ_list = driver.find_element(By.ID, 'univ_nm_back')
