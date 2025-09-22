@@ -9,8 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
  ### 여기에 아이디 비밀번호 자기꺼 입력해야함
 # ID, PW 값
-id = '아이디'
-pw = '비번'
+id = input("id를 입력하세요")
+pw = input("비번을 입력하세요")
 
 # Site Open (Driver Load)
 target = 'https://selc.or.kr/lms/main/MainView.do'
